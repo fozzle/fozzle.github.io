@@ -10,19 +10,25 @@
         <link rel="stylesheet" href="/css/syntax.css">
 
         <!-- Custom CSS -->
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/main.css">
 
     </head>
     <body>
 
         <div class="site">
-          <div class="header">
-            <h1 class="title"><a href="/">{{ site.name }}</a></h1>
-            <a class="extra" href="/">home</a>
+	  <div class="header">
+	    <h1>K|PETROVI.CH</h1>
+	    <ul>
+		<li><a href="/blog">Blog</a></li>
+		<li><a href="/stuff">Stuff</a></li>
+                <li><a href="/about">About</a></li>
+		<li><a href="/elsewhere">Elsewhere</a></li>
+	    </ul>
           </div>
 
           {{ content }}
-
+	</div>
 
     </body>
 </html>
