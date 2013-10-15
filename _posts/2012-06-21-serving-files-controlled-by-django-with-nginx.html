@@ -1,0 +1,43 @@
+---
+layout: post
+title: Serving Files Controlled by Django with NginX
+categories:
+- Admin
+- Django
+- Nginx
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+<strong>The following post is related to a Nginx/Apache2/Django stack as described <a title="Lincoln Loop Best Practices" href="http://lincolnloop.com/django-best-practices/deployment/servers.html">in this article...</a></strong>
+
+<p>If you ever need to serve files, of course you shouldn't use Django to do it! It's common knowledge on how to setup static files with Nginx, but what about if you would offer file downloads that are access controlled by Django? (In my case, I had network shares that were required to be accessible from the Django application to serve to users, but still hidden from the world.)</p>
+
+<p>Well it's easy with <a title="Django-sendfile" href="https://github.com/johnsensible/django-sendfile">django-sendfile</a> and Nginx!</p>
+
+<p>What you are basically doing is taking advantage of Nginx's "<a title="XSendfile" href="http://wiki.nginx.org/XSendfile">X-Accel-Redirect</a>" which is similar to lighthttpd's X-Sendfile and Apache2's mod_xsendfile. The library just abstracts the work a little bit, and makes it easy to drop in backends for different environments.</p>
+
+<p>First install django-sendfile and create all the views you need, etc. It's very straightforward to use and sufficiently documented.</p>
+
+<p>Then just add the following to the proper sites-available file in nginx:</p>
+
+<pre class="lang:default decode:true" title="Nginx Config">location /files {
+	alias /path/to/files;
+	internal;
+}</pre>
+
+<p>Which will serve the URI /files<strong>/goop/foo.jpg </strong>the file <strong>/path/to/files/goop/foo.jpg </strong>or you can use:</p>
+
+<pre class="lang:default decode:true">location /files {
+	root /path/to/files;
+	internal;
+}</pre>
+
+<p>Which will serve the URI /<strong>files/goop/foo.jpg </strong>the file /path/to/files/files/goop/foo.jpg</p>
+
+<p>Since this rule is <strong>internal</strong> it will not respond to any other request but from your Django application. Upon receiving the X-Accel-Redirect header from the Django app it coughs up the file, sidestepping Django and keeping things snappy.</p>
+
+<p>Now you can control downloads served through Nginx with Django!</p>

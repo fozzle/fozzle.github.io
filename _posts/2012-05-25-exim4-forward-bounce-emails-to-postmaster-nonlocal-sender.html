@@ -1,0 +1,21 @@
+---
+layout: post
+title: 'Exim4: Forward Bounce Emails to Postmaster, Nonlocal Sender'
+categories:
+- Admin
+- Exim
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+<p>At work our users send a lot of mass mailings through our system. When we send it, we make the from header their email so other users can reply directly to the appropriate person. However, due to some erroneous emails, users sending messages complained of bouncebacks clogging up their inboxes.</p>
+
+<p>We decided to route all bounceback emails to the postmaster email. Took a bit to track down exactly what I was supposed to do, but eventually I found errors_to.</p>
+
+<p>In the <strong>routers</strong> section, under the <strong>dnslookup</strong> router, add this line.</p>
+<pre class="lang:default decode:true crayon-selected">errors_to = postmaster@oursite.com</pre>
+
+<p>That's it!</p>

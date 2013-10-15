@@ -1,10 +1,22 @@
+/* skelly */
+
 body {
  color: #323623;
+ font-family: 'Helvetica Neue', 'Helvetica', 'sans-serif';
 }
 
+.site {
+  margin: 50px auto 0px auto;
+  width: 60%;
+}
+
+.site.home {
+  margin-top: 20%;
+}
+
+/* Header and nav biz */
+
 .header {
-  margin: 100px auto 0px auto;
-  width: 70%;
   text-align: center;
 }
 
@@ -12,24 +24,33 @@ body {
   font-family: 'Ubuntu Condensed', sans-serif;
   margin-bottom: 0px;
   font-size: 52px;
+  -webkit-font-smoothing: antialiased;
+  color: #323623;
 }
 
-.header ul {
+ul.nav {
   list-style: none;
   padding: 0px;
+  margin-top: 4px;
   font-size: 12px;
 }
 
-.header ul li {
+ul.nav li {
   display: inline;
 }
+
+/* other */
 
 a {
   color: #79850D;
   text-decoration: none;
-  font-weight: bold;
 }
 
 a:hover {
   color: #D2D952;
+}
+
+.meta {
+  font-size: 12px;
+  font-style: italic;
 }

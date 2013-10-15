@@ -1,0 +1,120 @@
+---
+layout: post
+title: Using XSLT Rewrites in WSO2 API Manager
+categories:
+- Admin
+tags:
+- WSO2 API Manager
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+<p>Since we're having some issues with Hadoop redirects and the API manager, we're looking into performing some simple transformations to make them play nice. We couldn't find much information on how to do this with the API manager, but interestingly enough, the API manager is based on the WSO2 Enterprise Service Bus. We know now that the ESB has the capability to run In and Out sequences (including transformations) in order to accommodate say, turning SOAP into REST and vice versa. We think we might be able to use this to solve our little redirect problem with some clever XSLT rewrites.</p>
+
+<p>The following is a little tutorial to get the <a title="Tutorial" href="http://wso2.org/library/knowledge-base/2011/03/handling-httpget-request-invoking-external-web-service-wso2-esb">"Hello World" XSLT tutorial for the ESB</a> working with the API Manager instead. I borrow heavily from this tutorial, it's about 90% the same.<a href="http://wso2.org/library/knowledge-base/2011/03/handling-httpget-request-invoking-external-web-service-wso2-esb">
+</a></p>
+
+<p>To get started with the "Hello World" of making the API manager perform transformations, begin by running the test SimpleStockQuoteService provided by the ESB. Here are the steps to do this:</p>
+
+<ol>
+	<li>Download the ESB from WSO2</li>
+	<li>Build the SimpleStockQuoteService located in the <em>samples/axis2Server</em>/<em>src/SimpleStockQuoteService</em> with ant</li>
+	<li>Run <em>axis2server.sh</em> in <em>samples/axis2Server</em></li>
+</ol>
+
+<p>This is a SOAP service that we will be querying via REST through the API manager. We're just using this for an example.</p>
+
+<p>Next you'll want to create two XLST files, to make things easier, just name them <strong>request_transform.xslt</strong>, <strong>response_transform.xslt. </strong> Here are their contents.</p>
+
+<pre class="lang:xhtml decode:true" title="request_transform.xslt">&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"&gt;
+&lt;xsl:param name="symbol"/&gt;
+&lt;xsl:template match="/"&gt;
+    &lt;m0:getQuote xmlns:m0="http://services.samples"&gt;
+        &lt;m0:request&gt;
+            &lt;m0:symbol&gt;&lt;xsl:value-of select="$symbol"/&gt;&lt;/m0:symbol&gt;
+        &lt;/m0:request&gt;
+    &lt;/m0:getQuote&gt;
+&lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</pre>
+
+&nbsp;
+
+<pre class="lang:xhtml decode:true" title="response_transform.xslt">&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"&gt;
+&lt;xsl:param name="symbol"/&gt;
+&lt;xsl:param name="high"/&gt;
+&lt;xsl:param name="low"/&gt;
+&lt;xsl:template match="/"&gt;
+    &lt;m0:getQuote xmlns:m0="http://services.samples"&gt;
+        &lt;m0:response&gt;
+            &lt;m0:company&gt;&lt;xsl:value-of select="$symbol"/&gt;&lt;/m0:company&gt;
+    &lt;m0:high&gt;&lt;xsl:value-of select="$high"/&gt;&lt;/m0:high&gt;
+    &lt;m0:low&gt;&lt;xsl:value-of select="$low"/&gt;&lt;/m0:low&gt;
+        &lt;/m0:response&gt;
+    &lt;/m0:getQuote&gt;
+&lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</pre>
+
+<p>We will reference these files in our configuration. For now just put them in the WSO2 API Manager subfolder of <em>repository/samples/resources/transform</em> (Note: there's nothing special about this directory, in fact you'll have to create it. This was just a carry over from the ESB tutorial. Where the API Manager looks for them is defined in the configuration by yourself)</p>
+
+<p>Now that's out of the way. Start WSO2 and create an API just like you normally would, pointing it at <em>http://localhost:9000/services/SimpleStockQuoteService</em>. This is the example SOAP endpoint we started running earlier. Now go to Carbon (default <em>https://localhost:9443/carbon). </em>Navigate to <em>Source View</em> under <em>Service Bus</em>. We're going to edit the configuration XML directly. I think it's interesting to note that Carbon seems to have the UI to edit in/out sequences without going through the configuration, but it's broken!</p>
+
+<p>Now find the API we just created within the XML schema. It should look like <em>&lt;api name="&lt;user&gt;--&lt;nameofapi&gt;....</em> Once you've found it, edit out the <em>&lt;inSequence&gt; </em>and <em>&lt;outSequence</em>&gt; containers, and put in the following XML.</p>
+
+<pre class="lang:default decode:true" title="inSequence">&lt;enrich&gt;
+  &lt;source type="inline" clone="true"&gt;
+    &lt;a xmlns=""/&gt;
+  &lt;/source&gt;
+  &lt;target type="body" action="child"/&gt;
+&lt;/enrich&gt;
+&lt;log level="full"/&gt;
+  &lt;property name="company" expression="substring-after(get-property('To'),'company/')"/&gt;
+  &lt;xslt key="xslt-transform-request"&gt;
+    &lt;property name="symbol" expression="get-property('company')"/&gt;
+  &lt;/xslt&gt;
+  &lt;header name="Action" value="urn:getQuote"/&gt;
+&lt;log level="full"/&gt;
+&lt;send&gt;
+  &lt;endpoint name="ep1"&gt;
+    &lt;address uri="http://localhost:9000/services/SimpleStockQuoteService" format="soap11"/&gt;
+  &lt;/endpoint&gt;
+&lt;/send&gt;</pre>
+
+&nbsp;
+
+<pre class="lang:default decode:true" title="outSequence">&lt;property xmlns:ax21="http://services.samples/xsd" xmlns:ns="http://services.samples" name="response_symbol" expression="//ns:return/ax21:symbol/child::text()"/&gt;
+&lt;property xmlns:ax21="http://services.samples/xsd" xmlns:ns="http://services.samples" name="response_high" expression="//ns:return/ax21:high/child::text()"/&gt;
+&lt;property xmlns:ax21="http://services.samples/xsd" xmlns:ns="http://services.samples" name="response_low" expression="//ns:return/ax21:low/child::text()"/&gt;
+&lt;log level="custom"&gt;
+  &lt;property name="response symbol:" expression="get-property('response_symbol')"/&gt;
+  &lt;property name="response high  :" expression="get-property('response_high')"/&gt;
+  &lt;property name="response low   :" expression="get-property('response_low')"/&gt;
+&lt;/log&gt;
+&lt;xslt key="xslt-transform-response"&gt;
+  &lt;property name="symbol" expression="get-property('response_symbol')"/&gt;
+  &lt;property name="high" expression="get-property('response_high')"/&gt;
+  &lt;property name="low" expression="get-property('response_low')"/&gt;
+&lt;/xslt&gt;
+&lt;send/&gt;</pre>
+
+<p>Here all we really did was take the config from the ESB tutorial and drop it in for our API instead. Don't forget to add the following in your config as well (I added it at the beginning, not inside any container).</p>
+
+<pre class="lang:default decode:true" title="config">&lt;localEntry key="xslt-transform-request" src="file:repository/samples/resources/transform/request_transform.xslt"/&gt;
+&lt;localEntry key="xslt-transform-response" src="file:repository/samples/resources/transform/response_transform.xslt"/&gt;</pre>
+
+<p>Now when you query your API at <em>http://localhost:8280/&lt;whatever you named it&gt;/&lt;version&gt;/company/IBM, </em>you should get a response like this</p>
+
+<pre class="lang:default decode:true" title="response">&lt;m0:getQuote xmlns:m0="http://services.samples"&gt;
+  &lt;m0:response&gt;
+    &lt;m0:company&gt;IBM&lt;/m0:company&gt;
+    &lt;m0:high&gt;91.25734854343622&lt;/m0:high&gt;
+    &lt;m0:low&gt;-88.76604951249396&lt;/m0:low&gt;
+  &lt;/m0:response&gt;
+&lt;/m0:getQuote&gt;</pre>
+
+<p>Notice how SOAP isn't returned...and it wasn't provided...for the SOAP webservice.</p>
+
+<p>Now how do we think this will solve the Hadoop redirect problem? Well the main problem is that redirects are being returned with hostnames that WSO2 can't recognize. If we can rewrite these to proper IPs, maybe we can circumvent this issue. Also, the CREATED webhdfs:// location, although not a redirect, also throws the API manager for a loop. With an XSLT transform, maybe we can just toss this out (we don't need it for our purposes, a confirmation will do...).</p>
+
+&nbsp;

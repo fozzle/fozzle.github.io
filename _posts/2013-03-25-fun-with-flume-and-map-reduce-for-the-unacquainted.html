@@ -1,0 +1,70 @@
+---
+layout: post
+title: Fun with Flume, and Map Reduce for the Unacquainted
+categories:
+- Admin
+- Hadoop
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+<strong>Flume Hello World</strong>
+
+<p>Just did a little demo with <a title="Flume" href="http://flume.apache.org/">Flume</a> today. Using the same 2VM cluster Hadoop setup from earlier, I built Flume on my namenode and was easily able to put data into HDFS in a fault-tolerant manner.</p>
+
+<p><img alt="" src="http://flume.apache.org/_images/UserGuide_image00.png" width="620" height="221" /> Flume at it's most simple level.</p>
+
+<p>Flume, in an oversimplified nutshell, is a service that can collect large amounts of data and store them in HDFS in a fault tolerant manner. You define various <em>sources</em> which will take in data, <em>channels</em> which are buffers of sorts that can hold data and move it to other locations from sources, and <em>sinks</em> which can insert into HDFS, write to a console, HBase, IRC, etc. You can route data from multiple channels to consolidate, route to multiple locations, define backup routes...it's all really cool. Not too hard to get a hello world example up too, I had it writing to HDFS with this simple config:</p>
+
+<pre class="lang:sh decode:true" title="Flume HDFS "># Channel definition
+agent1.channels.c1.type = memory
+agent1.channels.c1.capacity = 1000
+agent1.channels.c1.transactionCapacity = 100
+
+# Netcat source definition
+agent1.sources.r1.type = netcat
+agent1.sources.r1.bind = 0.0.0.0
+agent1.sources.r1.port = 44444
+# Link source to channel
+agent1.sources.r1.channels = c1
+
+# HDFS Sink
+agent1.sinks.k1.type = hdfs
+agent1.sinks.k1.hdfs.path = hdfs://&lt;pathtoyournamenode&gt;/flume/test
+# Link sink to channel
+agent1.sinks.k1.channel = c1
+
+# Components are all defined, just activate them on agent1
+agent1.channels = c1
+agent1.sources = r1
+agent1.sinks = k1</pre>
+
+<p>And starting up the agent (from the Flume directory)...</p>
+
+<pre class="lang:sh decode:true">bin/flume-ng agent --conf-file conf/&lt;conf_file&gt; --name agent1 -Dflume.root.logger=INFO,console</pre>
+
+<p>Now by telneting to localhost:44444 and typing some input, files were created in HDFS containing what I input. Obviously there's much more you can do with Flume, but this suffices for "hello world".</p>
+
+<p><strong>Map Reduce for Dummies</strong></p>
+
+<p>I've been working a lot with the system admin side of things recently. Setting up VMs, poring through config files, all that jazz. I had a fuzzy understanding of the map/reduce paradigm (to be fair I still do), but I've been spending some time brushing up and I feel I'm getting a grip.</p>
+
+<p>It's defined by two functions, operating on key value pairs, allowing for massively parallel computation.</p>
+
+<p>The <em>map</em> function is processing your input key/value pairs, into intermediate key/value pairs for consumption by your <em>reduce </em>function, which typically is some sort of aggregation function on all values with the same intermediate key.</p>
+
+<p>How the Hadoop MR works is nicely documented <a href="http://wiki.apache.org/hadoop/HadoopMapReduce">in their wiki page</a>. Here's a TL;DR summary though.</p>
+
+<ol>
+	<li>Input split into smaller chunks, if needed. Splitting can occur anywhere. Distributed amongst waiting map tasks.</li>
+	<li>Input formatted into K/V pairs. (Key <em>and </em>value not necessarily needing to be meaningful)</li>
+	<li>Mapper function as defined by the user is applied.</li>
+	<li>Mapper output given to Reduce, Reduce tasks copy files where needed to reduce network I/O.</li>
+	<li>Pairs are sorted so that keys are contiguous</li>
+	<li>Reduce applied to K/V pairs.</li>
+</ol>
+
+<p>Also a good read is the <a title="Google Map Reduce" href="http://static.googleusercontent.com/external_content/untrusted_dlcp/research.google.com/en/us/archive/mapreduce-osdi04.pdf">Google paper on map reduce.</a></p>

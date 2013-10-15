@@ -1,0 +1,168 @@
+---
+layout: post
+title: Scala Observations - Part 3
+categories:
+- Scala
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+<p>The final few sections: High-Order Functions, Collections, Pattern Matching, Annotations, Types, and Implicits. Covered in a whirlwind afternoon, here's some takeaways.</p>
+
+&nbsp;
+<ol>
+	<li><span style="line-height: 13px;"><strong>High-Order Functions</strong>
+</span></li>
+</ol>
+<ul>
+<ul>
+	<li>Functions are first-order citizens in Scala, can be passed around in variables and parameters.</li>
+	<li>Anonymous functions are available.</li>
+	<li>
+<pre class="lang:java decode:true" title="Anonymous Function">// Useful for placing in parameters. Can be assigned to a value.
+(x : Int) =&gt; 3 + x</pre>
+&nbsp;</li>
+	<li>Functions can take function parameters.</li>
+	<li>
+<pre class="lang:java decode:true " title="Functions as Parameters">def foo(bar: (Int) =&gt; Int) = bar(3)</pre>
+&nbsp;</li>
+	<li>...And functions can return functions.</li>
+	<li>
+<pre class="lang:java decode:true " title="Functions returning functions">def foo(bar: String) = (x :String) =&gt; bar + " " + x</pre>
+&nbsp;</li>
+	<li>Scala will infer types when passing anonymous functions around.</li>
+	<li>Useful higher order functions in scala include <em>map, reduceLeft/Right, sortWith...</em></li>
+	<li>Scala supports closures.</li>
+	<li>Scala supports currying which allows for multiple parameters.</li>
+	<li>You can create control abstractions, which appear like language keywords.</li>
+</ul>
+	<li><strong>Sets</strong>
+<ul>
+	<li>Scala has a big collections library that has iterable sequences, sets, and maps.</li>
+	<li>There are immutable and mutable versions of both.</li>
+	<li>Scala lists have a head and tail, the tail of a non-empty list is another list.</li>
+	<li>Mapping over collections can be very helpful. There's other variations of this like reducing, folding, and scanning.</li>
+	<li>After applying the function to the first two elements, reducing applies a binary function to the result of that first call and the next elements, then the result of that and the next element, and so on.</li>
+	<li>Fold is like reduce that takes an initial value.</li>
+	<li>Scanning will give you a collection of all intermediate results.</li>
+	<li>There are threadsafe collection classes provided.</li>
+	<li>Using <em>.par</em> on a collection will perform the next chained call concurrently. This works on for loops.</li>
+	<li>Streams are lazily implemented collections.</li>
+</ul>
+</li>
+	<li><strong>Pattern Matching</strong>
+<ul>
+	<li>No switch statements, use <em>match</em>. It also doesn't fall through.</li>
+	<li>Cases can include guards, which can be any Boolean condition.</li>
+	<li>You can match all sorts of things. Types, arrays, lists, tuples...</li>
+	<li>You can use pattern matching in variable declarations for functions that return more than one thing.</li>
+	<li></li>
+</ul>
+</li>
+	<li><strong>Annotations</strong>
+<ul>
+	<li>You can annotate classes, methods, fields, local variables, params, expressions, types...you can apply multiple annotations.</li>
+	<li>Annotations can be used for some compilation optimizations, like tail recursion.</li>
+	<li><em>@throws</em> annotations are required if you will be calling Scala methods from Java code, or else the exception will not be caught.</li>
+</ul>
+</li>
+	<li><strong>Types</strong>
+<ul>
+	<li>If you are looking to chain methods on a subclass, use <em>this.type</em> as the return type on a method, so that the type returned matches the type of the object that called it. This is the singleton type.</li>
+	<li>You also use the <em>Object.type</em> notation when you want to pass in a singleton type to a method.</li>
+	<li>Nested classes belong to the object in which they are nested, so the nested class <em>Thingy</em> nested in the <em>f</em><em>oo </em>instance of the <i>BeepBoop</i> object is of a different <strong>type</strong> than the <em>Thingy</em> class nested in the <em>bar</em> instance of the same <em>BeepBoop</em> object.</li>
+	<li>If you want to allow for loose interpretation of the nested class types, you can use a <strong>type projection. </strong>For the above example, if you want to allow <em>Thingy</em> objects of <strong>any </strong><em>BeepBoop</em> object to be valid, use <em>BeepBoop#Thingy</em> as a type declaration.</li>
+	<li>Paths must be stable except for the final type. They cannot be variables. To be stable, it must specify a single, definitive scope.</li>
+	<li>Type alias declared with the <em>type</em> modifier, must be in a nested class or object, cannot be declared at the top level of a file.</li>
+	<li>
+<pre class="lang:java decode:true ">type Foo = scala.collection.mutable.HashMap[String, Int]</pre>
+&nbsp;</li>
+	<li>Structural typing achieved by putting something like this instead of a type declaration. Will make Scala check for the existence of methods.</li>
+	<li>
+<pre class="lang:java decode:true ">def fooBar(foo: { def bar(str: String): Any }) {
+  println foo.bar("hello")
+}</pre>
+&nbsp;</li>
+	<li>Compound types declared using <em>with</em> much like when inheriting from multiple traits. Value must belong to all types in order to be valid.</li>
+	<li>You can use infix types if you want to confuse other developers. (I don't think this adds much value personally.)</li>
+	<li>
+<pre class="lang:java decode:true ">//String Map Int instead of Map[String, Int]</pre>
+&nbsp;</li>
+	<li>Existential types are used for compatibility w/ Java wildcards. It is a type declaration followed by a <em>forSome {...}</em> where the braces have type and val declarations.</li>
+	<li>Scala types!
+<ul>
+	<li>Class or Trait - <em>class C, trait C</em></li>
+	<li>Tuple - <em>(T1, T2...Tn)</em></li>
+	<li>Function - <em>(T1, T2...Tn) =&gt; T</em></li>
+	<li>Annotated - <em>T @A</em></li>
+	<li>Parameterized - <em>A[T1, T2...Tn]</em></li>
+	<li>Singleton - <em>value.type</em></li>
+	<li>Type Projection - <em>O#I</em></li>
+	<li>Compound - <em>T1 with T2 with ... with Tn { declarations }</em></li>
+	<li>Infix - <em>T1 A T2</em></li>
+	<li>Existential - <em>T forSome { type and val declarations }</em></li>
+</ul>
+</li>
+	<li>Self types are used to control which mixins can be used with a class.</li>
+	<li>
+<pre class="lang:default decode:true ">// MyTrait can only be mixed in with subclasses of Foo, ensuring that bar
+// is always available.
+trait MyTrait {
+ this: Foo =&gt;
+   def bar() { //do something }
+}</pre>
+&nbsp;</li>
+	<li>To  use dependency interjection, supply a trait for each service component that describes dependencies with self types, traits describing service interface, abstract val to be instantiated with the service, and optionally implementations of the interface. Then have a component configuration object which instantiates the services the way you want, and extend off that.</li>
+	<li>Abstract types are declared using <i>type Foo</i> and not specifying a type. It's expected that subclasses will define the type. You can also make abstract types in the type parameter. Typically type parameters are used if you want control over types on instantiation.</li>
+</ul>
+</li>
+	<li><strong>Implicits</strong>
+<ul>
+	<li>You can define your own conversions by making <strong>implicit conversion functions</strong>. These are functions with one parameter and the <em>implicit</em> keyword that will automatically be applied to convert values.</li>
+	<li>
+<pre class="lang:java decode:true ">implicit def int2Fraction(n: Int) = Fraction(n, 1)
+
+// Now this will evaluate because integer is automatically converted
+val foo = 3 * Fraction(4, 5)</pre>
+&nbsp;</li>
+	<li>If you want to extend classes, you can use implicits to convert to a custom class. For example, if I wanted to add <em>read</em> to <em>java.io.File</em> I could define a <strong>RichFile</strong> class that has that method, and then make an implicit function to  convert <strong>File </strong>to <strong>RichFile </strong>when <em>read</em> is called.</li>
+	<li>You have to import the implicits so that they can be used. It may be good to use local imports to restrict the scope of the implicit to the block you are working within.</li>
+	<li>Implicit conversions triggered in 3 situations
+<ul>
+	<li>Type of expression differs from expected type</li>
+	<li>Object accesses a nonexistent member</li>
+	<li>Object invokes method with args that don't match parameters.</li>
+</ul>
+</li>
+	<li>Implicits <em>won't</em> be called in the following situations
+<ul>
+	<li>The code compiles without it</li>
+	<li>Multiple conversions needed</li>
+	<li>Ambiguous conversion implicits are present</li>
+</ul>
+</li>
+	<li>Implicit parameters will cause the compiler to look for default values to supply</li>
+	<li>Implicit parameters are pulled from the following locations
+<ul>
+	<li>All<em> val </em>and <em>def</em> of the desired type within the current scope</li>
+	<li>In a companion object of the type that is associated with the desired type.</li>
+</ul>
+</li>
+	<li>There can only be one implicit <em>val</em> for any type.</li>
+	<li>You can even make implicit conversions using an implicit parameter by putting an implicit conversion function in a parameter.</li>
+	<li>If you have a object that has context bound generics, implicits will be used to convert the parameters as needed. So if you have an implicit parameter in a method that requires <em>Bar[</em><em>T]</em> and <em>T </em>is <em>Foo</em>,<em> </em>it will look for a <em>Bar</em><em>[Foo]</em> and construct a value for the methods that need it.<i>
+</i></li>
+	<li>Type constraints can be declared an implicit parameter.
+<ul>
+	<li>T =:= U - T equals U<em></em></li>
+	<li>T &lt;:&lt; U - T is a subtype of U</li>
+	<li>T &lt;%&lt; U - T can be converted to U</li>
+</ul>
+</li>
+	<li>You use those to make <strong>evidence</strong> objects, which will implicitly convert generics in order to access methods even though the compiler doesn't know what the generic is.</li>
+</ul>
+</li>
+</ul>

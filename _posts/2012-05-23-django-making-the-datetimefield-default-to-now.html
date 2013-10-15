@@ -1,0 +1,34 @@
+---
+layout: post
+title: 'Django: Making the DateTimeField Default to Now'
+categories:
+- Django
+- Python
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+<p>If you've ever needed to make a DatetimeField to default to a current datetime value, but with the option to adjust it, you should do this:</p>
+
+<blockquote>
+<pre class="lang:python decode:true">models.DateTimeField(default=datetime.now)</pre>
+</blockquote>
+
+<p>Notice how we didn't call the function datetime.now().</p>
+
+<p>Here you are actually passing in the function datetime.now itself, instead of evaluating the function with datetime.now() and making the default the result of that when the model is instantiated. Otherwise, you'll get a static datetime object as your default. This way it will be re-evaluated every time with the correct value.</p>
+
+If you need to do any arithmetic on the date, you can use a lambda function:
+<blockquote>
+<pre class="lang:python decode:true">models.DateTimeField(default=lambda: datetime.now() + timedelta(days=3))</pre>
+</blockquote>
+
+<p>Likewise we are passing in a function to be re-evaluated every time.</p>
+
+Of course, it goes without saying if you want it to <em>always</em> be now, you can use :
+<blockquote>
+<pre class="lang:python decode:true">models.DateTimeField(auto_now_add=True)</pre>
+</blockquote>

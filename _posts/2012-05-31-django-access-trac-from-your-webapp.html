@@ -1,0 +1,70 @@
+---
+layout: post
+title: 'Django: Access Trac from Your Webapp Using XML-RPC'
+categories:
+- Django
+- Python
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+<p>At work, we recently decided to open up our ticket system to the staff. This way they could directly submit tickets for us to edit, and view tickets that have been submitted. This is more in line with how most devs seem to use ticketing systems anyway.</p>
+
+<p>However, using trac's default web interface is pretty awful in my opinion. We created a custom interface that seamlessly integrates with our application, so no-one even notices it's a separate system. Since the XML-RPC plugin was already installed on trac and Python has a built in XML-RPC library, I decided to use that as the method of communication between our application and trac. Here's an example of how to grab ticket details:</p>
+
+<ol>
+  <li>Make sure you have the <a title="XML RPC Plugin" href="http://trac-hacks.org/wiki/XmlRpcPlugin">XML-RPC</a> plugin installed on Trac.</li>
+  <li>Make a dummy user with XML-RPC permissions or enable XML-RPC for anonymous users.</li>
+  <li>Example code:
+    <pre class="lang:python decode:true">import xmlrpclib
+
+    server = xmlrpclib.ServerProxy('https://USER:PASS@TRAC_LOCATION/login/xmlrpc')
+
+    # You can put any valid Trac ticket query here, max=0 returns every ticket
+    # Note this returns only ticket ID's
+    tickets = server.ticket.query('max=0')
+
+    # Multicall is used to reduce requests, combines into one POST
+    multicall = xmlrpclib.MultiCall(server)
+
+    for ticket in tickets:
+        multicall.ticket.get(ticket)
+
+    for ticket in multicall():
+        # At this point 'ticket' is a list. At index 0 is the ticket ID, followed by the created timestamp,
+        # then the last modified timestamp, and finally a dictionary of the ticket's attributes.
+        # Do with them what you will :)</pre></li>
+
+<p>I wouldn't run this kind of query if you have a lot of tickets though, this is just an example!</p>
+
+<p>A quick note to this, if you're trying to access these dates to perform operations on or output using Django's <a href="https://docs.djangoproject.com/en/dev/ref/templates/builtins/?from=olddocs#date">date</a> template filter, you'll want to change them from <a href="http://docs.python.org/c-api/datetime.html">DateTime</a> instances to datetime instances. I don't know if this is the "best" way, but I couldn't find anything else and this worked nicely. If you know of something more straightforward, let me know!</p>
+
+<pre class="lang:python decode:true" title="Changing DateTime to datetime">from datetime import datetime
+
+correct_datetime_instance = datetime.strptime(str(incorrect_datetime_instance), '%Y%m%dT%H:%M:%S')</pre>
+
+<p>And as one last example, here's how we did ticket submission.</p>
+
+<pre class="lang:python decode:true" title="Creating a new Trac Ticket"> form = TicketSubmitForm()
+
+    # Connect to trac server.
+    server = xmlrpclib.ServerProxy('https://USER:PASS@TRAC_LOCATION/login/xmlrpc')
+
+    if request.method == 'POST':
+        form = TicketSubmitForm(request.POST)
+
+        if form.is_valid():
+            user = request.user
+            subject = form.cleaned_data['subject']
+            description = form.cleaned_data['description']
+            system = form.cleaned_data['system']
+
+            # Create a ticket.
+            ticket_number = server.ticket.create("Webform Ticket: {subject}".format(subject=subject),
+                                                 "From {user}&lt;{username}&gt;: \n\n{description}".format(description=description,
+                                                                                                     user=user.get_full_name(),
+                                                                                                     username=user.username),
+                                                 {'component': system, 'type': 'task'})</pre>
