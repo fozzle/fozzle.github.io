@@ -16,7 +16,7 @@ game.EndScreen = me.ScreenObject.extend({
   },
 
   onResetEvent: function() {
-    console.log("reset event for EndScreen")
+    console.log("reset event for EndScreen");
     me.game.add(new game.HUD.Dialogue(20, me.video.getHeight() - 150, "mira", this.strings));
   },
 

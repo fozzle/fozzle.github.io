@@ -28,13 +28,13 @@ game.PlayerEntity = me.ObjectEntity.extend({
         this.renderable.setCurrentAnimation('left');
       }
 
-      this.vel.x = -3;
+      this.vel.x = -1.5;
     } else if (me.input.isKeyPressed('right')) {
       if (!this.renderable.isCurrentAnimation('right')) {
         this.renderable.setCurrentAnimation('right');
       }
 
-      this.vel.x = 3;
+      this.vel.x = 1.5;
     } else {
       this.vel.x = 0;
     }
@@ -44,13 +44,13 @@ game.PlayerEntity = me.ObjectEntity.extend({
         this.renderable.setCurrentAnimation('up');
       }
 
-      this.vel.y = -3;
+      this.vel.y = -1.5;
     } else if (me.input.isKeyPressed('down')) {
       if (!this.renderable.isCurrentAnimation('down')) {
         this.renderable.setCurrentAnimation('down');
       }
 
-      this.vel.y = 3;
+      this.vel.y = 1.5;
     } else {
 
       this.vel.y = 0;
@@ -159,7 +159,7 @@ game.FriendlyOcto = game.OctopusEntity.extend({
     this.parent(x, y, settings);
     this.speaking = false;
     this.firstText = ["", "blblbubgublbublgl bglubb lbgublg", "bgbllububl"];
-    this.translatedText = ["", "Rejoice! The Almighty <Iron> has sent a <fish> in it's own <!", "Did you come from the <ocean>?", "Come, you must partake in <glbbgg> we are so <bubbly> you've arrived!"];
+    this.translatedText = ["", "Rejoice! The Almighty <Iron> has sent a <fish> in it's own <vision>!", "Did you come from the <ocean>?", "Come, you must partake in <glbbgg> we are so <bubbly> you've arrived!"];
   },
 
   onCollision: function() {
@@ -196,7 +196,7 @@ game.RunnerTrigger = me.CollectableEntity.extend({
 
       setTimeout(function() {
         game.data.dialogue.portrait = me.loader.getImage("mira");
-        game.data.dialogue.text = ["Did you see that?!", "It sort of looked like an octopus . . . but a lot bigger.", "Be on the lookout for more."];
+        game.data.dialogue.text = ["Did you see that?!", "Lifeform similar in appearance to octopus.", "Be on the lookout for more."];
       }, 1000);
 
       game.data.seenOctopus = true;
