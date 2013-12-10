@@ -13,6 +13,7 @@ game.EndScreen = me.ScreenObject.extend({
     this.font = new me.Font('Helvetica', 16, 'white');
     this.strings = [". . . We're already home . . ."];
     this.index = 0;
+    this.earth = me.loader.getImage("newearth");
   },
 
   onResetEvent: function() {
@@ -25,7 +26,7 @@ game.EndScreen = me.ScreenObject.extend({
     if (me.input.isKeyPressed("action") && !this.keyDown) {
       this.keyDown = true;
       if (this.index + 1 == this.strings.length) {
-        me.state.change(me.state.PLAY);
+        window.location.reload();
       } else {
         this.index++;
       }
@@ -39,7 +40,9 @@ game.EndScreen = me.ScreenObject.extend({
   },
 
   draw: function(context) {
+    console.log("draw func called");
     // me.video.clearSurface(context, "black");
+    context.drawImage(this.earth, me.video.getWidth() / 2 - 75, me.video.getHeight()/2 - 100);
   },
 
 

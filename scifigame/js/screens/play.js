@@ -9,8 +9,6 @@ game.PlayScreen = me.ScreenObject.extend({
 		// add our HUD to the game world	
 		me.game.add(new game.HUD.Container());
 
-		console.log("reset event");
-
 		me.audio.playTrack("zones");
 
     me.game.onLevelLoaded = this.levelChange.bind(this);
@@ -50,6 +48,16 @@ game.PlayScreen = me.ScreenObject.extend({
       	break;
     }
 
+    if (levelid === "wasteland") {
+      me.audio.stopTrack();
+      me.audio.playTrack("chant");
+    } else {
+      if (me.audio.getCurrentTrack() != "zones") {
+        me.audio.stopTrack();
+        me.audio.playTrack("zones");
+      }
+    }
+
     // Reset scare
     game.data.runnerScared = false;
 
@@ -63,6 +71,6 @@ game.PlayScreen = me.ScreenObject.extend({
 	onDestroyEvent: function() {
 		// remove the HUD from the game world
 		// me.game.world.removeChild(me.game.world.getEntityByProp("name", "HUD")[0]);
-		me.audio.stopTrack();
+		// me.audio.stopTrack();
 	}
 });

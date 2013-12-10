@@ -14,6 +14,7 @@ game.resources = [
 	{name: "mira", type:"image", src:"data/img/mira.png"},
 	{name: "octopus", type:"image", src:"data/img/octopus-portrait.png"},
 	{name: "statue", type: "image", src:"data/img/statue.png"},
+	{name: "newearth", type:"image", src:"data/img/newearth.png"},
 
 
 	/* Atlases 
@@ -36,6 +37,7 @@ game.resources = [
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/", channel : 1},
 	 */	
 	{name: "zones", type: "audio", src: "data/bgm/", channel: 1},
+	{name: "chant", type: "audio", src: "data/bgm/", channel: 1},
 
 	/* Sound effects. 
 	 * @example*/

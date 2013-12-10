@@ -145,11 +145,13 @@ game.StatueEntity = me.ObjectEntity.extend({
   onCollision: function() {
     if (me.input.isKeyPressed("action") && !this.speaking) {
       game.data.dialogue.portrait = me.loader.getImage("mira");
-      game.data.dialogue.text = ["Analyzing structure . . . ", " . . . ", "Captain . . ."]
+      game.data.dialogue.text = ["", "Analyzing structure . . . ", ". . . Captain . . ."]
       
       setTimeout(function() {
         me.state.change(me.state.USER + 1);
-      }, 6000);
+      }, 4000);
+
+      this.speaking = true;
     }
   }
 });

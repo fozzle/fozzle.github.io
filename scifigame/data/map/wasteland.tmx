@@ -68,7 +68,7 @@
     <property name="spritewidth" value="32"/>
    </properties>
   </object>
-  <object name="StatueEntity" x="276" y="129" width="88" height="111">
+  <object name="StatueEntity" x="256" y="86" width="88" height="111">
    <properties>
     <property name="image" value="statue"/>
     <property name="spriteheight" value="172"/>
