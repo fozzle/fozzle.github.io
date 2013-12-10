@@ -196,7 +196,7 @@ game.RunnerTrigger = me.CollectableEntity.extend({
 
       setTimeout(function() {
         game.data.dialogue.portrait = me.loader.getImage("mira");
-        game.data.dialogue.text = ["Did you see that?!", "Lifeform similar in appearance to octopus.", "Be on the lookout for more."];
+        game.data.dialogue.text = ["Did you see that?!", "Lifeform spotted with similar appearance to common octopus.", "Data extremely valuable. Be on the lookout for more."];
       }, 1000);
 
       game.data.seenOctopus = true;
