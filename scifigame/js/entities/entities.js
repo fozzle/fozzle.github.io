@@ -61,7 +61,18 @@ game.PlayerEntity = me.ObjectEntity.extend({
     res = me.game.collide(this);
 
     if (res) {
-      console.log(res);
+      console.log("player collision", res);
+      if (res.obj.name == "breakablecrystal") {
+        // cancel movement
+        console.log("move cancel");
+        this.pos.x = this.pos.x - this.vel.x;
+        this.pos.y = this.pos.y - this.vel.y;
+      }
+
+      if (res.obj.name == "breakablecrystal" && !game.data.seenCrystal) {
+        game.data.dialogue.portrait = me.loader.getImage("mira");
+        game.data.dialogue.text = ["Analyzing . . .", "Material seems unbreakable without great strength. Suggestion: fix translation unit with 10 parts and ask that 'octopus' for help."]
+      } 
     }
 
     if (this.vel.x !=0 || this.vel.y != 0) {
@@ -131,9 +142,29 @@ game.RunnerEntity = me.ObjectEntity.extend({
       return true;
     }
 
-    return false;
+    return true;
   }
 });
+
+game.BreakableCrystal = me.ObjectEntity.extend({
+  init: function(x, y, settings) {
+    this.parent(x, y, settings);
+    this.gravity = 0;
+  },
+
+  onCollision: function(res, obj) {
+  },
+
+  update: function() {
+    if (!this.inViewport) {
+      return false;
+    }
+
+    var res = me.game.collide(this);
+
+    return true;
+  }
+})
 
 game.StatueEntity = me.ObjectEntity.extend({
   init: function(x, y, settings) {
@@ -156,22 +187,43 @@ game.StatueEntity = me.ObjectEntity.extend({
   }
 });
 
-game.FriendlyOcto = game.OctopusEntity.extend({
+game.FriendlyOcto = me.ObjectEntity.extend({
   init: function(x, y, settings) {
     this.parent(x, y, settings);
+    
+    this.gravity = 0;
+    this.renderable.addAnimation('normal', [0, 1], 500);
+    this.renderable.setCurrentAnimation('normal');
+
     this.speaking = false;
     this.firstText = ["", "blblbubgublbublgl bglubb lbgublg", "bgbllububl"];
     this.translatedText = ["", "Rejoice! The Almighty <Iron> has sent a <fish> in it's own <vision>!", "Did you come from the <ocean>?", "Come, you must partake in <glbbgg> we are so <bubbly> you've arrived!"];
   },
 
-  onCollision: function() {
-    if (me.input.isKeyPressed("action") && !this.speaking) {
+  onCollision: function(res, obj) {
+
+
+    if (obj.name == "breakablecrystal") {
+      console.log("check it out breakablecrystal");
+      this.vel.y = 0;
+      this.vel.x = 1;
+
+      console.log('hit by nice octo man');
+      obj.collidable = false;
+      me.audio.play("glass");
+      me.game.remove(obj);
+
+      return;
+    }
+
+    if (me.input.isKeyPressed("action") && !this.speaking && obj.name == "mainplayer") {
       game.data.dialogue.portrait = me.loader.getImage("octopus");
 
       if (game.data.sprockets < 10) {
         game.data.dialogue.text = this.firstText;
       } else {
         game.data.dialogue.text = this.translatedText;
+        this.vel.y = -1;
       }
 
       this.speaking = true;
@@ -182,6 +234,24 @@ game.FriendlyOcto = game.OctopusEntity.extend({
     }
 
 
+
+
+  },
+
+  update: function() {
+    if (!this.inViewport) {
+      return false;
+    }
+
+    this.updateMovement();
+    var res = me.game.collide(this);
+
+
+    if (this.vel.x !=0 || this.vel.y != 0) {
+      this.parent();
+    }
+
+    return true;
   }
 });
 
@@ -189,9 +259,14 @@ game.RunnerTrigger = me.CollectableEntity.extend({
   init: function(x, y, settings) {
     this.parent(x, y, settings);
     this.alpha = 0;
+    this.vel.x = 0;
+    this.vel.y = 0;
   },
 
-  onCollision: function() {
+  onCollision: function(res, obj) {
+    if (obj.name != "mainplayer") {
+      return;
+    }
 
     if (!game.data.seenOctopus) {
       me.audio.play("shock");

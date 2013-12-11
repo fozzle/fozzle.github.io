@@ -66,6 +66,7 @@ var game = {
 		me.entityPool.add("RunnerTrigger", game.RunnerTrigger);
 		me.entityPool.add("StatueEntity", game.StatueEntity);
 		me.entityPool.add("FriendlyOcto", game.FriendlyOcto);
+		me.entityPool.add("BreakableCrystal", game.BreakableCrystal);
 
 		// keyboard
 		me.input.bindKey(me.input.KEY.LEFT, "left");

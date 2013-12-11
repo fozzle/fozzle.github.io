@@ -15,6 +15,7 @@ game.resources = [
 	{name: "octopus", type:"image", src:"data/img/octopus-portrait.png"},
 	{name: "statue", type: "image", src:"data/img/statue.png"},
 	{name: "newearth", type:"image", src:"data/img/newearth.png"},
+	{name: "breakable", type:"image", src:"data/img/breakable.png"},
 
 
 	/* Atlases 
@@ -41,7 +42,7 @@ game.resources = [
 
 	/* Sound effects. 
 	 * @example*/
-
+	{name: "glass", type: "audio", src: "data/sfx/", channel: 2},
 	{name: "drill", type: "audio", src: "data/sfx/", channel : 2},
 	{name: "startup", type: "audio", src: "data/sfx/", channel: 2},
 	{name: "shock", type: "audio", src: "data/sfx/", channel: 2}
