@@ -14,6 +14,18 @@ body {
   margin-top: 20%;
 }
 
+/* embedded tumblr */
+
+.tumblr_posts {
+  list-style: none;
+}
+
+.tumblr_title {
+  font-size: 22px;
+  color: #79850D;
+  font-weight: bold;
+}
+
 /* Header and nav biz */
 
 .header {
