@@ -6,7 +6,7 @@ layout: post
 My recent work has had me delving deep into the wild world of WebRTC, WebAudio, and canvas. WebRTC especially definitely feels like it has a ways to go before it's going to be stable. Here are two interesting quirks I thought I'd share to hopefully save a few hours for others.
 
 Using audio track from WebRTC PeerConnection in WebAudio
---------------------------------------------------------
+========================================================
 
 The following was run in Chrome v52 only.
 
@@ -52,7 +52,7 @@ audioTag.srcObject = audioStream;
 It seems strange to me that you must have a muted audio element to be able to run the stream through WebAudio! I don't believe this is ever mentioned anywhere, either...
 
 Audio Channels for Audio Track sent over PeerConnection are merged in Chrome but not Firefox 
---------------------------------------------------------------------------------------------
+============================================================================================
 
 Another baffling issue. Again, Chrome v52 showing unexpected behavior while Firefox v49 works as one would expect.
 
@@ -92,6 +92,6 @@ This is a fairly annoying case to reproduce, so you can use [this example](https
 I've filed a bug report [here](https://bugs.chromium.org/p/chromium/issues/detail?id=640286) in hopes that I could get some clarification on whether this was a bug or intended.
 
 Welp
-----
+====
 
 All I have to say in closing is: Best of luck to anyone else out there trying to make use of these cutting-edge APIs!
