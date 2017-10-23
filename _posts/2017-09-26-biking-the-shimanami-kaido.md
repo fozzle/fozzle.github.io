@@ -105,7 +105,7 @@ As a reward for all your hard work, there is the onsen in town. Which is now lik
 
 ![onsen view](/img/shimanami_kaido/onsenview-thumbnail.JPG "Onsen view (not taken in onsen)")
 
-Also the town has quite a few shrines, temples, and parks to check out. One of the riverside parks is lined with cherry trees and while they were not in bloom, one could imagine that during the right season the scenery would be breathtaking. Also, plenty of abandoned stores, if you find urban decay interesting (I do!).
+When you're done pickling yourself in the bath, the town has quite a few shrines, temples, and parks to check out. One of the riverside parks is lined with cherry trees and while they were not in bloom, one could imagine that during the right season the scenery would be breathtaking. Also, plenty of abandoned stores, if you find urban decay interesting (I do!).
 
 ![Glorious Miyaura Port](/img/shimanami_kaido/abandoned-thumbnail.JPG "Abandonware!")
 
