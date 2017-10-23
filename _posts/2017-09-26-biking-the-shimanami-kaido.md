@@ -45,7 +45,7 @@ If the price tag on the Giant bikes is scaring you, don't feel as if you need to
 
 ### Dealing with Baggage
 
-Finally, if this is only part of a larger trip, you'll probably have some luggage with you. Don't let that stop you from living your Shimanami Kaido dreams! You can ship your luggage with [Yamato Transport](http://www.kuronekoyamato.co.jp/en/tourist/hotel/) for a relatively small fee. It's a simple, fast, and ubiquitous service that you've probably seen throughout Japan already. Look for the black cat carrying a kitten, that's their logo (cute!). You can ask your concierge or host to arrange a shipment to your destination hotel and an agent will come by and pick up your bags within no time. Alternatively you can fill out the form yourself and drop it off at most convenience stores, but I recommend getting help as you want to make sure you've got everything in proper order when dealing with your stuff. It cost us ~3000 yen to ship 2 large travel backpacks, and we were able to specify a date so that our stuff would arrive when we did. Originally we were going to just bike with our packs on, and I cannot stress enough how *terrible* that would have been in hindsight. If you're doing a one way journey, ship your luggage. It's worth it!
+Finally, if this is only part of a larger trip, you'll probably have some luggage with you. Don't let that stop you from living your Shimanami Kaido dreams! You can ship your luggage with [Yamato Transport](http://www.kuronekoyamato.co.jp/en/tourist/hotel/) for a relatively small fee. It's a simple, fast, and ubiquitous service that you've probably seen throughout Japan already. Look for the black cat carrying a kitten, that's their logo (cute!). You can ask your concierge or host to arrange a shipment to your destination hotel and an agent will come by and pick up your bags within no time. Alternatively you can fill out the form yourself and drop it off at most convenience stores, but I recommend getting help as you want to ensure you've got everything in proper order when dealing with your stuff. It cost us ~3000 yen to ship 2 large travel backpacks, and we were able to specify a date so that our stuff would arrive when we did. Originally we were going to just bike with our packs on, and I cannot stress enough how *terrible* that would have been in hindsight. If you're doing a one way journey, ship your luggage. It's worth it!
 
 ![Yamato Transport Logo](/img/shimanami_kaido/yamatotransport-thumbnail.PNG "This logo is so cute!")
 
@@ -101,7 +101,7 @@ When ordering dinner we got 3 main dishes because we were so bike-famished. The 
 
 ![food picture](/img/shimanami_kaido/food-thumbnail.JPG "SO GOOD!")
 
-As a reward for all your hard work, there is the onsen in town. Which is now like my \#1 most desired thing to see after a strenuous bike ride. The Mare GraCia Omishima onsen is located by the coast, and it costs ~500yen to bathe there. As with most onsens, make sure to bring your own towel and soap unless you want to rent/buy one on premises. The spa's feature is the saltwater bath which supposedly has healing properties but the thing that was most appreciated by me was the outdoor bath overlooking the coast. As it's facing West it makes for a perfect way to enjoy the sunset and end your day.
+As a reward for all your hard work, there is the onsen in town. Which is now like my \#1 most desired thing to see after a strenuous bike ride. The Mare GraCia Omishima onsen is located by the coast, and it costs ~500yen to bathe there. As with most onsens, remember to bring your own towel and soap unless you want to rent/buy one on premises. The spa's feature is the saltwater bath which supposedly has healing properties but the thing that was most appreciated by me was the outdoor bath overlooking the coast. As it's facing West it makes for a perfect way to enjoy the sunset and end your day.
 
 ![onsen view](/img/shimanami_kaido/onsenview-thumbnail.JPG "Onsen view (not taken in onsen)")
 
@@ -147,7 +147,7 @@ They were highlighted in this sweets photo book in the Ikuchijima lemon store. I
 
 #### Recommended Route - Mukaishima Island
 
-Thourougly defeated by the Japanese holidays, we pressed on to Muikaishima Island. As usual, the recommended route proved to be easy riding.
+Thoroughly defeated by the Japanese holidays, we pressed on to Muikaishima Island. As usual, the recommended route proved to be easy riding.
 
 It's not all tragic though, we did get a consolation hassaku-based sweet in the form of a cute bakery we found on the way.
 
@@ -177,7 +177,7 @@ Only this one wanted to be my friend though.
 
 ![Cat](/img/shimanami_kaido/cat-thumbnail.JPG "Finally, my love is met in kind")
 
-Also make sure to try Onomichi-style ramen while you're there, it's a local specialty. The key characteristics being a soy broth with a hint of fish paste, and melted lard floating on top.
+Also be sure to try Onomichi-style ramen while you're there, it's a local specialty. The key characteristics being a soy broth with a hint of fish paste, and melted lard floating on top.
 
 ![Onomichi ramen](/img/shimanami_kaido/onomichiramen-thumbnail.JPG "YUM")
 
