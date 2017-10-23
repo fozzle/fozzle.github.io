@@ -183,6 +183,6 @@ Also be sure to try Onomichi-style ramen while you're there, it's a local specia
 
 ## Wrapping Up
 
-There you have it, my personal recounting of biking the Shimanami Kaido. Of course, there's plenty of things we missed, and more than one way to undertake this journey, so this is by no means an definitive guide, but hopefully you have a good idea of what it's like to bike the Shimanami Kaido now and maybe some inspiration for your own visit!
+There you have it, my personal recounting of biking the Shimanami Kaido. Of course, there's plenty of things we missed, and more than one way to undertake this journey, so this is by no means a definitive guide, but hopefully you have a good idea of what it's like to bike the Shimanami Kaido now and maybe some inspiration for your own visit!
 
 If you have any particular questions, contact me [by email](mailto:kylepetrovich+helloworld@gmail.com) and I'll see if I can help.
