@@ -1,9 +1,32 @@
 ---
 layout: default
 ---
-<h2>{{ page.title }}</h2>
+<h1>{{ page.title }}</h1>
 <p class="meta">{{ page.date | date_to_string }}</p>
 
 <div class="post">
 {{ content }}
 </div>
+
+<script type="text/javascript" defer>
+  function linkImage(imageEl) {
+    const href  = imageEl.src.replace('-thumbnail.JPG', '.JPG').replace('-thumbnail.PNG', '.PNG');
+    const caption = imageEl.title;
+    imageEl.outerHTML = '<div class="captioned-image"><a href="' + href + '"><img title="' + caption + '" src="'+ imageEl.src + '" /></a><div class="caption">' + caption + '</div></div>';
+  }
+  console.log('running');
+  // Quick script to find thumbnails and link them to originals
+  const imageEls = document.querySelectorAll('img');
+
+  const thumbRe = /.*\-thumbnail\.(JPG|PNG)/;
+  console.log('imageEls', imageEls.length);
+  for (var i = 0; i < imageEls.length; i++) {
+    /* Check if src references -thumbnail.JPG pattern
+      If so, make it a link.
+    */
+    const imageEl = imageEls[i];
+    if (thumbRe.test(imageEl.src)) {
+      linkImage(imageEl);
+    }
+  }
+</script>

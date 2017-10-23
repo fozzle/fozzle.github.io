@@ -32,7 +32,8 @@ body {
   text-align: center;
 }
 
-.header h1 {
+.header .header-text {
+  font-weight: bold;
   font-family: 'Ubuntu Condensed', sans-serif;
   margin-bottom: 0px;
   font-size: 52px;
@@ -65,4 +66,19 @@ a:hover {
 .meta {
   font-size: 12px;
   font-style: italic;
+}
+
+.captioned-image {
+  margin: auto;
+  width: 80%;
+}
+
+.captioned-image img {
+  width: 100%;
+}
+
+.captioned-image .caption {
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
 }
