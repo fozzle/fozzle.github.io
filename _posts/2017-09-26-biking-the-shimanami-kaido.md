@@ -57,13 +57,17 @@ As stated before, we started in Imabari and ended in Onomichi, so this is from t
 
 We started off early as possible, not really knowing anything of the route. Our destination was Miyaura Port, a small town on Omishima Island, where we had a guesthouse reservation. I opted to as many of the side routes as I could. I believe this was a great choice, though somewhat trying at times.
 
-#### Intermediate Route - Oshimi Island
+#### Intermediate Route - Oshima Island
+
+![Oshima Island Route Map](/img/shimanami_kaido/oshima-thumbnail.JPG "Oshima Island Route Map")
 
 This segment was a very easy ride, overall. There are a few climbs but none that are extreme in grade. It is longer than the recommended route, however, at 15.2km. It runs along the coast of Oshima Island and you get to pass by a shipyard and see massive pieces of container ships being put together.
 
 ![Shipyard](/img/shimanami_kaido/shipyard2-thumbnail.JPG "Massive ships under construction")
 
 #### Advanced Route (Loop) - Hakatajima Island
+
+![Hakatajima Island Route Map](/img/shimanami_kaido/hakatajima-thumbnail.JPG "Hakatajima Island Route Map")
 
 The recommended route through Hakatajima is very short, you ride through it in a flash.
 
@@ -72,6 +76,8 @@ Near the end of the Hakatajima island recommended route, there is a turn off for
 ![Hirakiyami Park](/img/shimanami_kaido/peak-thumbnail.JPG "Worth?")
 
 #### Advanced Route - Omishima Island
+
+![Omishima Island Route Map](/img/shimanami_kaido/omishima-thumbnail.JPG "Omishima Island Route Map")
 
 Upon reaching Omishima Island you will soon be presented with a fork in the road, to continue on the recommended route or to take the advanced "Island Explorer" route. We, of course, opted for the latter. It's a bit longer, at ~21km vs the ~14km it would take to use the "recommended" and "intermediate" routes to get there. If you have the time or are going to Miyaura, I would recommend this route wholeheartedly. It is undoubtedly challenging, with *lots* of steep climbs, but there are spectacular vistas, museums, and an onsen awaiting you. I believe you can do it!
 
@@ -119,9 +125,13 @@ After waking early from a night's rest, we set off for Onomichi. Determined to m
 
 #### Intermediate Route - Omishima Island
 
+![Omishima Island Route Map](/img/shimanami_kaido/omishima-thumbnail.JPG "Omishima Island Route Map")
+
 We took the inner-island route to get from Miyaura Port to the recommended route via Route 21. I recall one medium grade, decently long climb. Not much more to say about this route to be honest! If given more time I would like to try the other Intermediate Route on the island, which goes around the perimeter but is longer distance-wise.
 
 #### Recommended Route - Ikuchijima Island
+
+![Ikuchijima Island Route Map](/img/shimanami_kaido/ikuchijima-thumbnail.JPG "Ikuchijima Island Route Map")
 
 The recommended route is very straightforward on Ikuchijima Island. You'll ride along a fairly flat coastline, passing some beautiful beaches in the process.
 
@@ -135,6 +145,8 @@ One thing to do while passing through this island is to stop by one of the lemon
 
 #### Recommended Route - Innoshima Island
 
+![Innoshima Island Route Map](/img/shimanami_kaido/innoshima-thumbnail.JPG "Innoshima Island Route Map")
+
 The recommended route is a breeze. Our primary goal here was the Hassaku Daifuku Mochi! Just look at these beauties!
 
 ![Hassaku Daifuku Mochi](/img/shimanami_kaido/mochibrochure-thumbnail.JPG "Foreshadowing!?")
@@ -147,7 +159,9 @@ They were highlighted in this sweets photo book in the Ikuchijima lemon store. I
 
 #### Recommended Route - Mukaishima Island
 
-Thoroughly defeated by the Japanese holidays, we pressed on to Muikaishima Island. As usual, the recommended route proved to be easy riding.
+![Mukaishima Island Route Map](/img/shimanami_kaido/mukaishima-thumbnail.JPG "Mukaishima Island Route Map")
+
+Thoroughly defeated by the Japanese holidays, we pressed on to Mukaishima Island. As usual, the recommended route proved to be easy riding.
 
 It's not all tragic though, we did get a consolation hassaku-based sweet in the form of a cute bakery we found on the way.
 
