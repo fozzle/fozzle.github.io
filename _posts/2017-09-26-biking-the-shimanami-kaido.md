@@ -20,6 +20,8 @@ A friend and I recently traveled to Japan for 21 days, starting in Tokyo and wor
 
 The Shimanami Kaido is an expressway built across the Seto Inland Sea spanning several islands via a multitude of impressive bridges. The real interesting part is that all these bridges have pedestrian and bike paths so the route has become a sort of cyclists' haven, offering both relaxing scenic rides or challenging climbs depending on the path you take. The scenery is nothing short of breathtaking and all routes are well marked by blue road stripes, making getting lost nearly impossible. The entirety of the route can be done in one day, or you can take your time and stay in one of the many lodgings available on the islands.
 
+You can find a lot more information on the official [Go-Shimanami](http://www.go-shimanami.jp/) website. I recommend looking at this [cycling guide map](http://www.go-shimanami.jp/download/cycling/cycling_map_en.pdf) which is what we used for route planning and has most of the info you need.
+
 ## Logistics
 
 ### Getting there
