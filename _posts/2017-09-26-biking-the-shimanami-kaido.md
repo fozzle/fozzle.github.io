@@ -32,7 +32,7 @@ You can start your journey in either Imabari or Onomichi. We chose to start in I
 
 I am of the belief that almost anyone that can ride a bike should be able to at least do the "recommended" Shimanami Kaido route on bike, without too much issue. It's 70km (~43 miles) in total, which is a lot, yes, but if you start early you shouldn't have a problem taking a leisurely pace. There are some climbs around the bridges but the bridges themselves and most of the recommended path is flat.
 
-![Elevation map along recommended route](/img/shimanami_kaido/elevationmap-thumbnail.JPG "Elevation map over recommended route, camera scan")
+![Elevation map along recommended route](/img/shimanami_kaido/elevationmap-thumbnail.PNG "Elevation map over recommended route, camera scan")
 
 If you are interested in the "advanced" routes, they can be challenging, but with *determination* and *the power of friendship* I believe even novice cyclists could struggle through. Whether or not the struggle is enjoyable is up to personal interpretation 😈.
 
