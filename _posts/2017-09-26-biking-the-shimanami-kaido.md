@@ -83,7 +83,7 @@ Near the end of the Hakatajima island recommended route, there is a turn off for
 
 Upon reaching Omishima Island you will soon be presented with a fork in the road, to continue on the recommended route or to take the advanced "Island Explorer" route. We, of course, opted for the latter. It's a bit longer, at ~21km vs the ~14km it would take to use the "recommended" and "intermediate" routes to get there. If you have the time or are going to Miyaura, I would recommend this route wholeheartedly. It is undoubtedly challenging, with *lots* of steep climbs, but there are spectacular vistas, museums, and an onsen awaiting you. I believe you can do it!
 
-Located on this path, you'll find a small coffee shop, with nothing else really around. I didn't catch the name but it's a very cute place to rest up for the coming journey.
+Located on this path, you'll find a [Omishima Coffee](http://omishimacoffee.com/), with nothing else really around. It's a lovely place to stop and rest up for the road ahead.
 
 ![Coffee Shop](/img/shimanami_kaido/coffeeshop-thumbnail.JPG "Coffee shop in the midst of mikan groves")
 
