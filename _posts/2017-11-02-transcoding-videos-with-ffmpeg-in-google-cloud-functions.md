@@ -82,7 +82,8 @@ exports.transcodeVideo = function transcodeVideo(event, callback) {
     .outputOptions('-b:a 160k')
     .outputOptions('-f mp4')
     .outputOptions('-preset fast')
-    .outputOptions('-movflags frag_keyframe+empty_moov') // This is interesting, https://github.com/fluent-ffmpeg/node-fluent-ffmpeg/issues/346#issuecomment-67299526
+    .outputOptions('-movflags frag_keyframe+empty_moov')
+    // https://github.com/fluent-ffmpeg/node-fluent-ffmpeg/issues/346#issuecomment-67299526 
     .on('start', (cmdLine) => {
       console.log('Started ffmpeg with command:', cmdLine);
     })
