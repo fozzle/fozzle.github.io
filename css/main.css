@@ -10,6 +10,12 @@ body {
   width: 60%;
 }
 
+@media (max-width: 500px) {
+  .site {
+    width: 90%;
+  }
+}
+
 .site.home {
   margin-top: 20%;
 }
