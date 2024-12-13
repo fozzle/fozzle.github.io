@@ -19,7 +19,7 @@ GEM
     faraday (0.12.1)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
-    ffi (1.9.18)
+    ffi (1.11.3)
     forwardable-extended (2.6.0)
     gemoji (3.0.0)
     github-pages (142)
